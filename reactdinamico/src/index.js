@@ -8,23 +8,31 @@ const App = () => {
     const [counters, setCounters] = useState({
         right: 0,
         left: 0,
-        clicks: 0,
-        mensaje: 'Probando el operador sped ...'
+        mensaje: 'Probando el operador spread ...'
     });
 
+    const [clicks, setClicks] = useState([])
+
     const handleClickLeft = () =>{
-        setCounters({
+       const newCountersState = {
             ...counters,
-            left: counters.left +1,
-            clicks: counters.clicks + 1
-        })
+            left: counters.left +1
+        
     }
+
+    setCounters(newCountersState);
+    setClicks(prevClicks =>{
+        return [...prevClicks, 'L']
+    })
+   }
 
     const handleClickRight = () =>{
         setCounters({
             ...counters,
-            right: counters.right + 1,
-            clicks: counters.clicks + 1
+            right: counters.right + 1
+        })
+        setClicks(prevClicks =>{
+            return [...prevClicks, 'R']
         }) 
     }
 
@@ -36,7 +44,7 @@ const App = () => {
 
             <button onClick={handleClickRight}>right</button>
             {counters.right}
-            <p>Los clics que has dado son: {counters.clicks}</p>
+            <p>Los clics que has dado son: {clicks.length}</p>
             <p>{counters.mensaje}</p>
         </div>
 
